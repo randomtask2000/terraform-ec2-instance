@@ -1,7 +1,7 @@
 # Terraform ec2 instance
 Simple example of how to provision an EC2 instance with Terraform
 
-# Create a settings file `terraform.auto.tfvars` that will configure access to your `AWS VPC` and let you `ssh` into your `EC2` instance after you're done:
+Create a settings file `terraform.auto.tfvars` that will configure access to your `AWS VPC` and let you `ssh` into your `EC2` instance after you're done:
 ```
 echo <<< EOL
 aws_access_key = "XXXXXXXXXXXXXXXXXXXX"
