@@ -17,7 +17,7 @@ vpc_id = "vpc-00000000x00x0xxx0"
 EOL >> terraform.auto.tfvars;
 ```
 
-After you're done creating the above file and adding your `aws access key`, `secret` and your `ssh public key`, runt he following:
+After you're done creating the above file and adding your `aws access key`, `secret` and your `ssh public key`, run the following:
 ```
 terraform init
 terraform plan
