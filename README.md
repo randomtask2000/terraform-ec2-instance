@@ -27,3 +27,5 @@ To remove the instance you run:
 ```
 echo yes | terraform destroy
 ```
+
+You're done and have fun!
