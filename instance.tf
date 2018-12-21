@@ -42,9 +42,9 @@ resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
   public_key = "${var.public_key}"
 }
-resource "aws_security_group" "allow_ssh_mosh_http" {
-  name        = "allow_all"
-  description = "Allow all inbound traffic"
+resource "aws_security_group" "security_group_ingress_egress" {
+  name        = "security_group_ingress_egress"
+  description = "Allow ssh mosh udp http test and egress all"
   vpc_id = "${data.aws_vpc.selected.id}"
   ingress {
     from_port   = 22
@@ -58,21 +58,27 @@ resource "aws_security_group" "allow_ssh_mosh_http" {
     protocol    = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  egress {
+  ingress {
     from_port       = 0
     to_port         = 80
     protocol        = "tcp"
     cidr_blocks     = ["0.0.0.0/0"]
   }
-  egress {
+  ingress {
     from_port       = 0
     to_port         = 8080
     protocol        = "tcp"
     cidr_blocks     = ["0.0.0.0/0"]
   }
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
   tags {
-    Name = "ssh mosh udp http test"
-    Group = "dev"
+    Name = "cloudbuild"
+    group = "cloudbuild"
   }
 }
 resource "aws_instance" "devbox" {
@@ -80,7 +86,7 @@ resource "aws_instance" "devbox" {
   ami           = "${data.aws_ami.ubuntu.id}"
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.deployer.key_name}"
-  vpc_security_group_ids = ["${aws_security_group.allow_ssh_mosh_http.id}"]
+  vpc_security_group_ids = ["${aws_security_group.security_group_ingress_egress.id}"]
   subnet_id = "${element(concat(data.aws_subnet_ids.selected.ids), count.index)}"
   tags = {
     Name = "Devbox"
