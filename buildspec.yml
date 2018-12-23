@@ -18,7 +18,13 @@ phases:
       - echo "AWS_REGION=${AWS_REGION}"
       - echo "PUBLIC_KEY=${PUBLIC_KEY}"
       - echo "VPC_ID=${VPC_ID}"
-      - echo "TERRAFORM_VERSION=${TERRAFORM_VERSION}"
+      - echo <<< EOL
+aws_access_key = "${AWS_ACCESS_KEY}"
+aws_secret_key = "${AWS_SECRET_KEY}"
+aws_region = "${AWS_REGION}"
+public_key = "${PUBLIC_KEY}"
+vpc_id = "${VPC_ID}"
+EOL >> terraform.auto.tfvars;
       - pwd
       - ls -larth
       - echo "********** install **********"
@@ -33,7 +39,7 @@ phases:
       - pwd
       - ls -larth
       - terraform init
-      - terraform apply -no-color -var 'github_personal_access_token=${GITHUB_PERSONAL_ACCESS_TOKEN}' -var 'aws_access_key=${AWS_ACCESS_KEY}' -var 'aws_secret_key=${AWS_SECRET_KEY}' -var 'aws_region=${AWS_REGION}' 'public_key=${PUBLIC_KEY}' -var 'vpc_id=${VPC_ID}' -var 'terraform_version=${TERRAFORM_VERSION}'
+      - terraform apply
   post_build:
     commands:
       - echo "post build"
