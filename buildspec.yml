@@ -22,11 +22,10 @@ phases:
       - pwd
       - ls -larth
       - echo "********** install **********"
-      - cd /tmp 
       - curl -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip 
-      - echo "${TERRAFORM_SHA256} terraform.zip" | sha256sum -c --quiet 
-      - unzip terraform.zip 
-      - mv terraform /usr/bin
+      - echo "${TERRAFORM_SHA256} /tmp/terraform.zip" | sha256sum -c --quiet 
+      - unzip /tmp/terraform.zip 
+      - mv /tmp/terraform /usr/bin
   build:
     commands:
       - echo "********** build **********"
