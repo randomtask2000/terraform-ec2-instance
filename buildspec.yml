@@ -24,7 +24,9 @@ phases:
       - echo "********** install **********"
       - curl -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip 
       - echo "${TERRAFORM_SHA256} /tmp/terraform.zip" | sha256sum -c --quiet 
+      - ls -larth /tmp/terraform*
       - unzip /tmp/terraform.zip 
+      - ls -larth /tmp/terraform*
       - mv /tmp/terraform /usr/bin/terraform
   build:
     commands:
