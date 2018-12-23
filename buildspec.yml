@@ -32,13 +32,15 @@ phases:
       - ls -larth /tmp/terraform*
       - unzip /tmp/terraform.zip -d /usr/bin/
       - ls -larth /usr/bin/terraform*
+      - terraform init -no-color -input=false                          # init terraform
+      - terraform plan -no-color -out=tfplan -input=false              # plan terraform
+      - pwd
+      - ls -larth
   build:
     commands:
       - echo "********** build **********"
-      - pwd
-      - ls -larth
-      - terraform init -no-color -input=false  
-      - terraform apply -no-color -parallelism=16 -input=false tfplan  
+      - terraform apply -no-color -parallelism=16 -input=false tfplan  # apply terraform
   post_build:
     commands:
-      - echo "post build"
+      - echo "********** post build **********"
+      - echo "********** done **********"
