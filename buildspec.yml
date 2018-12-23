@@ -12,7 +12,6 @@ phases:
       - echo "********** debug **********"
       - echo "TERRAFORM_VERSION=${TERRAFORM_VERSION}"
       - echo "TERRAFORM_SHA256=${TERRAFORM_SHA256}"
-      - echo "GITHUB_PERSONAL_ACCESS_TOKEN=${GITHUB_PERSONAL_ACCESS_TOKEN}"
       - echo "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}"
       - echo "AWS_SECRET_KEY=${AWS_SECRET_KEY}"
       - echo "AWS_REGION=${AWS_REGION}"
