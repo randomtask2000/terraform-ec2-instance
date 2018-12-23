@@ -10,7 +10,16 @@ phases:
   install:
     commands:
       - echo "install"
-       - cd /tmp && curl -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && echo "${TERRAFORM_SHA256} terraform.zip" | sha256sum -c --quiet && unzip terraform.zip && mv terraform /usr/bin
+      - echo "TERRAFORM_VERSION=${TERRAFORM_VERSION}"
+      - echo "TERRAFORM_SHA256=${TERRAFORM_SHA256}"
+      - echo "GITHUB_PERSONAL_ACCESS_TOKEN=${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      - echo "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}"
+      - echo "AWS_SECRET_KEY=${AWS_SECRET_KEY}"
+      - echo "AWS_REGION=${AWS_REGION}"
+      - echo "PUBLIC_KEY=${PUBLIC_KEY}"
+      - echo "VPC_ID=${VPC_ID}"
+      - echo "TERRAFORM_VERSION=${TERRAFORM_VERSION}"
+      - cd /tmp && curl -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && echo "${TERRAFORM_SHA256} terraform.zip" | sha256sum -c --quiet && unzip terraform.zip && mv terraform /usr/bin
   build:
     commands:
       - echo "build"
