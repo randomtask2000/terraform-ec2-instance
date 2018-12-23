@@ -19,6 +19,8 @@ phases:
       - echo "PUBLIC_KEY=${PUBLIC_KEY}"
       - echo "VPC_ID=${VPC_ID}"
       - echo "TERRAFORM_VERSION=${TERRAFORM_VERSION}"
+      - pwd
+      - ls -larth
       - echo "********** install **********"
       - cd /tmp 
       - curl -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip 
