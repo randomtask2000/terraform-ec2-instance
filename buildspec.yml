@@ -28,6 +28,8 @@ phases:
   build:
     commands:
       - echo "********** build **********"
+      - pwd
+      - ls -larth
       - terraform init -no-color -var 'github_personal_access_token=${GITHUB_PERSONAL_ACCESS_TOKEN}' -var 'aws_access_key=${AWS_ACCESS_KEY}' -var 'aws_secret_key=${AWS_SECRET_KEY}' -var 'aws_region=${AWS_REGION}' 'public_key=${PUBLIC_KEY}' -var 'vpc_id=${VPC_ID}' -var 'terraform_version=${TERRAFORM_VERSION}'
   post_build:
     commands:
