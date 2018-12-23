@@ -77,8 +77,8 @@ resource "aws_security_group" "security_group_ingress_egress" {
     cidr_blocks     = ["0.0.0.0/0"]
   }
   tags {
-    Name = "cloudbuild"
-    group = "cloudbuild"
+    Name = "EC2 Instance"
+    group = "instance"
   }
 }
 resource "aws_instance" "devbox" {

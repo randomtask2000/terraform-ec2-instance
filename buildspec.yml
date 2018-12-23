@@ -1,17 +1,20 @@
 version: 0.2
 
-#env:
-#  variables:
-#    key: "value"
-#    key: "value"
+
+env:
+  variables:
+    TERRAFORM_VERSION: 0.10.3
+    TERRAFORM_SHA256: f316c6ff8b2abe257250d19cbe0e3cf745dedfa67b37bb4afaf95e0291efeade
 
 phases:
   install:
     commands:
       - echo "install"
+       - cd /tmp && curl -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && echo "${TERRAFORM_SHA256} terraform.zip" | sha256sum -c --quiet && unzip terraform.zip && mv terraform /usr/bin
   build:
     commands:
       - echo "build"
+      - terraform init -no-color -var 'github_personal_access_token=${GITHUB_PERSONAL_ACCESS_TOKEN}' -var 'aws_access_key=${AWS_ACCESS_KEY}' -var 'aws_secret_key=${AWS_SECRET_KEY}' -var 'aws_region=${AWS_REGION}' 'public_key=${PUBLIC_KEY}' -var 'vpc_id=${VPC_ID}' -var 'terraform_version=${TERRAFORM_VERSION}'
   post_build:
     commands:
       - echo "post build"
