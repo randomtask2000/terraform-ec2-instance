@@ -25,7 +25,7 @@ phases:
       - curl -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip 
       - echo "${TERRAFORM_SHA256} /tmp/terraform.zip" | sha256sum -c --quiet 
       - unzip /tmp/terraform.zip 
-      - mv /tmp/terraform /usr/bin
+      - mv /tmp/terraform /usr/bin/terraform
   build:
     commands:
       - echo "********** build **********"
