@@ -23,6 +23,7 @@ phases:
       - echo aws_region = "${AWS_REGION}" >> terraform.auto.tfvars;
       - echo public_key = "${PUBLIC_KEY}" >> terraform.auto.tfvars;
       - echo vpc_id = "${VPC_ID}" >> terraform.auto.tfvars;
+      - cat terraform.auto.tfvars
       - pwd
       - ls -larth
       - echo "********** install **********"
