@@ -17,12 +17,15 @@ phases:
       - echo "AWS_REGION=${AWS_REGION}"
       - echo "PUBLIC_KEY=${PUBLIC_KEY}"
       - echo "VPC_ID=${VPC_ID}"
+      - echo "S3_BUCKET=${S3_BUCKET}"
+      - echo "DESTROY_AFTER_BUILD=${DESTROY_AFTER_BUILD}"
       - echo 'aws_access_key = '\""${AWS_ACCESS_KEY}"\" >> terraform.auto.tfvars;
       - echo 'aws_secret_key = '\""${AWS_SECRET_KEY}"\" >> terraform.auto.tfvars;
       - echo 'aws_region = '\""${AWS_REGION}"\" >> terraform.auto.tfvars;
       - echo 'public_key = '\""${PUBLIC_KEY}"\" >> terraform.auto.tfvars;
       - echo 'vpc_id = '\""${VPC_ID}"\" >> terraform.auto.tfvars;
       - cat terraform.auto.tfvars
+      - test -r terraform.auto.tfvars && aws s3 cp terraform.auto.tfvars "s3://${S3_BUCKET}/terraform.auto.tfvars" || true 
       - pwd
       - ls -larth
       - echo "********** install **********"
@@ -39,7 +42,12 @@ phases:
     commands:
       - echo "********** build **********"
       - terraform apply -no-color -parallelism=16 -input=false tfplan  # apply terraform
+      - test -r terraform.tfstate && aws s3 cp terraform.tfstate "s3://${S3_BUCKET}/terraform.tfstate" || true
   post_build:
     commands:
       - echo "********** post build **********"
+      - |
+        if [ "${DESTROY_AFTER_APPLY}" = true ]; then                       # destroy resources
+          terraform destroy -no-color -input=false -force
+        fi
       - echo "********** done **********"
