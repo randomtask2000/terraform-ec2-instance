@@ -51,7 +51,7 @@ phases:
           aws s3 cp "s3://${S3_BUCKET}/terraform.tfstate" ./
         fi
       - |
-        if [ \( test -r terraform.tfstate \) -o \("${DESTROY}" = "true"\) ]; then                       # destroy resources
+        if [ "${DESTROY}" = "true" ]; then                       # destroy resources
           echo "********** about to destroy **********"
           terraform destroy -no-color -input=false -force
         else
