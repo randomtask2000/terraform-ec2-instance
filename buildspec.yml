@@ -47,7 +47,7 @@ phases:
     commands:
       - echo "********** post build **********"
       - |
-        if [ "${DESTROY_AFTER_APPLY}" = true ]; then                       # destroy resources
+        if [ "${DESTROY_AFTER_APPLY}" = "true" ]; then                       # destroy resources
           terraform destroy -no-color -input=false -force
         fi
       - echo "********** done **********"
