@@ -45,9 +45,9 @@ phases:
       - |
         exists=$(aws s3 ls "s3://${S3_BUCKET}/terraform.tfstate")
         if [ -z "$exists" ]; then
-          echo "s3://${S3_BUCKET}/terraform.tfstate does not exist"
+          echo "tfstate file does not exist"
         else
-          echo "s3://${S3_BUCKET}/terraform.tfstate exists"
+          echo "tfstate file exists"
           aws s3 cp "s3://${S3_BUCKET}/terraform.tfstate" ./
         fi
       - |
