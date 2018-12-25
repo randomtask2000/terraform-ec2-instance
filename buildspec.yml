@@ -22,6 +22,7 @@ phases:
           echo "EXPORT S3_BUCKET=${S3_BUCKET}"
           echo "EXPORT DESTROY_AFTER_APPLY=${DESTROY_AFTER_APPLY}"
           echo "EXPORT DESTROY=${DESTROY}"
+          echo "EXPORT DEGUB=${DEGUB}"
         fi
       - echo 'aws_access_key = '\""${AWS_ACCESS_KEY}"\" >> terraform.auto.tfvars;
       - echo 'aws_secret_key = '\""${AWS_SECRET_KEY}"\" >> terraform.auto.tfvars;
