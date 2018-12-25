@@ -48,9 +48,9 @@ phases:
       - |
         exists=$(aws s3 ls "s3://${S3_BUCKET}/terraform.tfstate")
         if [ -z "$exists" ]; then
-          echo "tfstate file does not exist"
+          echo "tfstate file exist"
         else
-          echo "tfstate file exists"
+          echo "tfstate file does not exists"
           aws s3 cp "s3://${S3_BUCKET}/terraform.tfstate" ./
         fi
       - |
@@ -62,7 +62,7 @@ phases:
           terraform plan -no-color -out=tfplan -input=false              # plan terraform
           terraform apply -no-color -parallelism=16 -input=false tfplan  # apply terraform
         fi
-      - test -r terraform.tfstate && aws s3 cp terraform.tfstate "s3://${S3_BUCKET}/terraform.tfstate" -f || true
+      - test -r terraform.tfstate && aws s3 cp terraform.tfstate "s3://${S3_BUCKET}/terraform.tfstate" || true
   post_build:
     commands:
       - echo "********** post build **********"
