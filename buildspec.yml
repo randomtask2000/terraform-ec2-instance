@@ -35,8 +35,6 @@ phases:
       - ls -larth /tmp/terraform*
       - unzip /tmp/terraform.zip -d /usr/bin/
       - ls -larth /usr/bin/terraform*
-      - terraform init -no-color -input=false                          # init terraform
-      - terraform plan -no-color -out=tfplan -input=false              # plan terraform
       - pwd
       - ls -larth
   build:
@@ -56,6 +54,8 @@ phases:
           terraform destroy -no-color -input=false -force
         else
           echo "********** about to apply **********"
+          terraform init -no-color -input=false                          # init terraform
+          terraform plan -no-color -out=tfplan -input=false              # plan terraform
           terraform apply -no-color -parallelism=16 -input=false tfplan  # apply terraform
         fi
       - test -r terraform.tfstate && aws s3 cp terraform.tfstate "s3://${S3_BUCKET}/terraform.tfstate" -f || true
