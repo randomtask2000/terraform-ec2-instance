@@ -9,17 +9,20 @@ env:
 phases:
   install:
     commands:
-      - echo "********** debug **********"
-      - echo "TERRAFORM_VERSION=${TERRAFORM_VERSION}"
-      - echo "TERRAFORM_SHA256=${TERRAFORM_SHA256}"
-      - echo "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}"
-      - echo "AWS_SECRET_KEY=${AWS_SECRET_KEY}"
-      - echo "AWS_REGION=${AWS_REGION}"
-      - echo "PUBLIC_KEY=${PUBLIC_KEY}"
-      - echo "VPC_ID=${VPC_ID}"
-      - echo "S3_BUCKET=${S3_BUCKET}"
-      - echo "DESTROY_AFTER_APPLY=${DESTROY_AFTER_APPLY}"
-      - echo "DESTROY=${DESTROY}"
+      - |
+        if [ "${DEBUG}" = "true" ]; then 
+          echo "********** debug **********"
+          echo "EXPORT TERRAFORM_VERSION=${TERRAFORM_VERSION}"
+          echo "EXPORT TERRAFORM_SHA256=${TERRAFORM_SHA256}"
+          echo "EXPORT AWS_ACCESS_KEY=${AWS_ACCESS_KEY}"
+          echo "EXPORT AWS_SECRET_KEY=${AWS_SECRET_KEY}"
+          echo "EXPORT AWS_REGION=${AWS_REGION}"
+          echo "EXPORT PUBLIC_KEY=${PUBLIC_KEY}"
+          echo "EXPORT VPC_ID=${VPC_ID}"
+          echo "EXPORT S3_BUCKET=${S3_BUCKET}"
+          echo "EXPORT DESTROY_AFTER_APPLY=${DESTROY_AFTER_APPLY}"
+          echo "EXPORT DESTROY=${DESTROY}"
+        fi
       - echo 'aws_access_key = '\""${AWS_ACCESS_KEY}"\" >> terraform.auto.tfvars;
       - echo 'aws_secret_key = '\""${AWS_SECRET_KEY}"\" >> terraform.auto.tfvars;
       - echo 'aws_region = '\""${AWS_REGION}"\" >> terraform.auto.tfvars;
