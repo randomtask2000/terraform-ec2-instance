@@ -18,7 +18,7 @@ phases:
       - echo "PUBLIC_KEY=${PUBLIC_KEY}"
       - echo "VPC_ID=${VPC_ID}"
       - echo "S3_BUCKET=${S3_BUCKET}"
-      - echo "DESTROY_AFTER_BUILD=${DESTROY_AFTER_BUILD}"
+      - echo "DESTROY_AFTER_APPLY=${DESTROY_AFTER_APPLY}"
       - echo "DESTROY=${DESTROY}"
       - echo 'aws_access_key = '\""${AWS_ACCESS_KEY}"\" >> terraform.auto.tfvars;
       - echo 'aws_secret_key = '\""${AWS_SECRET_KEY}"\" >> terraform.auto.tfvars;
