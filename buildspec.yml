@@ -12,17 +12,17 @@ phases:
       - |
         if [ "${DEBUG}" = "true" ]; then 
           echo "********** debug **********"
-          echo "EXPORT TERRAFORM_VERSION=${TERRAFORM_VERSION}"
-          echo "EXPORT TERRAFORM_SHA256=${TERRAFORM_SHA256}"
-          echo "EXPORT AWS_ACCESS_KEY=${AWS_ACCESS_KEY}"
-          echo "EXPORT AWS_SECRET_KEY=${AWS_SECRET_KEY}"
-          echo "EXPORT AWS_REGION=${AWS_REGION}"
-          echo "EXPORT PUBLIC_KEY=${PUBLIC_KEY}"
-          echo "EXPORT VPC_ID=${VPC_ID}"
-          echo "EXPORT S3_BUCKET=${S3_BUCKET}"
-          echo "EXPORT DESTROY_AFTER_APPLY=${DESTROY_AFTER_APPLY}"
-          echo "EXPORT DESTROY=${DESTROY}"
-          echo "EXPORT DEBUG=${DEBUG}"
+          echo "export TERRAFORM_VERSION=${TERRAFORM_VERSION}"
+          echo "export TERRAFORM_SHA256=${TERRAFORM_SHA256}"
+          echo "export AWS_ACCESS_KEY=${AWS_ACCESS_KEY}"
+          echo "export AWS_SECRET_KEY=${AWS_SECRET_KEY}"
+          echo "export AWS_REGION=${AWS_REGION}"
+          echo "export PUBLIC_KEY=${PUBLIC_KEY}"
+          echo "export VPC_ID=${VPC_ID}"
+          echo "export S3_BUCKET=${S3_BUCKET}"
+          echo "export DESTROY_AFTER_APPLY=${DESTROY_AFTER_APPLY}"
+          echo "export DESTROY=${DESTROY}"
+          echo "export DEBUG=${DEBUG}"
         fi
       - echo 'aws_access_key = '\""${AWS_ACCESS_KEY}"\" >> terraform.auto.tfvars;
       - echo 'aws_secret_key = '\""${AWS_SECRET_KEY}"\" >> terraform.auto.tfvars;
