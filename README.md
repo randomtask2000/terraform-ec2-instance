@@ -1,5 +1,5 @@
 # Terraform ec2 instance
-Simple example of how to provision an EC2 instance with Terraform. This repo is used to show how to use AWS CodeBuild as a `Terraform a service [here](https://github.com/randomtask2000/terraform_codebuild_ec2_instance).
+Simple example of how to provision an EC2 instance with Terraform. This repo is used to show how to use AWS CodeBuild as a `Terraform` service [here](https://github.com/randomtask2000/terraform_codebuild_ec2_instance).
 
 ## Setup
 Create a settings file `terraform.auto.tfvars` that will configure access to your `AWS VPC` and let you `ssh` into your `EC2` instance after you're done:
