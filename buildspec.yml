@@ -30,7 +30,7 @@ phases:
       - echo 'public_key = '\""${PUBLIC_KEY}"\" >> terraform.auto.tfvars;
       - echo 'vpc_id = '\""${VPC_ID}"\" >> terraform.auto.tfvars;
       - cat terraform.auto.tfvars
-      - test -r terraform.auto.tfvars && aws s3 cp terraform.auto.tfvars "s3://${S3_BUCKET}/terraform.auto.tfvars" -f || true 
+      - test -r terraform.auto.tfvars && aws s3 cp terraform.auto.tfvars "s3://${S3_BUCKET}/ec2/terraform.auto.tfvars" -f || true 
       - pwd
       - ls -larth
       - echo "********** install **********"
@@ -46,12 +46,12 @@ phases:
     commands:
       - echo "********** build **********"
       - |
-        exists=$(aws s3 ls "s3://${S3_BUCKET}/terraform.tfstate")
+        exists=$(aws s3 ls "s3://${S3_BUCKET}/ec2/terraform.tfstate")
         if [ -z "$exists" ]; then
           echo "tfstate file exist"
         else
           echo "tfstate file does not exists"
-          aws s3 cp "s3://${S3_BUCKET}/terraform.tfstate" ./
+          aws s3 cp "s3://${S3_BUCKET}/ec2/terraform.tfstate" ./
         fi
       - |
         if [ "${DESTROY}" = "true" ]; then                               # destroy resources
@@ -62,7 +62,7 @@ phases:
           terraform plan -no-color -out=tfplan -input=false              # plan terraform
           terraform apply -no-color -parallelism=16 -input=false tfplan  # apply terraform
         fi
-      - test -r terraform.tfstate && aws s3 cp terraform.tfstate "s3://${S3_BUCKET}/terraform.tfstate" || true
+      - test -r terraform.tfstate && aws s3 cp terraform.tfstate "s3://${S3_BUCKET}/ec2/terraform.tfstate" || true
   post_build:
     commands:
       - echo "********** post build **********"
