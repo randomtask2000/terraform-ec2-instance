@@ -72,10 +72,14 @@ resource "aws_instance" "devbox" {
   key_name = "${aws_key_pair.deployer.key_name}"
   vpc_security_group_ids = ["${aws_security_group.security_group_ingress_egress.id}"]
   subnet_id = "${element(concat(data.aws_subnet_ids.selected.ids), count.index)}"
-  
+  iam_instance_profile = "${aws_iam_instance_profile.test_profile.name}"
+  user_data = "${element(data.template_file.arep_config.*.rendered, count.index)}"
   tags = {
     Name = "Devbox"
     Group = "dev"
   }
-  
+}
+
+data "template_file" "arep_config" {
+  template = "${file("init.sh")}"
 }
